@@ -1,0 +1,44 @@
+<h4>Measuring Compactness</h4>
+
+<h5>Compactness and Geographic Gerrymandering</h5>
+<p>Compactness measures have been widely used to assess geographic gerrymandering. Although it is generally accepted that legislative districts should be “compact” the defintion of compactness has proved elusive. Numerous, sometimes conflicting, measures of compactness across a number of theoretical dimensions have been proposed in the academic literature. These measures are typically based on comparing geometric features of the district (e.g. perimeters, areas) to the features of a related base geometric object (e.g. minimum bounding circle, convex hull).</p>
+<p>Here we provide six of the most frequently used measures of compactness used by academic researchers: (1) Polsby-Popper (Polsby and Popper, 1991); (2) Schwartzberg (1965); (3) Reock (1961); (4) Convex Hull; (5) X-Symmetry; and (6) Length-Width Ratio (C.C. Harris, 1964). As no one threshold for determining if a district has been gerrymandered exists we provide three cutoffs from which to compare scores from different districts (1) the scores for the original gerrymander, (2) the state mean, and (3) the state median.</p>
+
+<h5>Polsby-Popper</h5>
+<p>The Polsby-Popper (PPPP) measure (polsby & Popper, 1991) is the ratio of the area of the district (AD) to the area of a circle whose circumference is equal to the perimeter of the district (PD). A district’s Polsby-Popper score falls with the range of [0,1] and a score closer to 1 indicates a more compact district.</p>
+<img src="images/eq_polsby.png" alt="" height="250" width="500"><br>
+<img src="images/polsby.png" alt="Polsby-Popper" height="600" width="600"><br>
+
+<h5>Schwartzberg</h5>
+<p>The Schwartzberg score (SS) compactness score is the ratio of the perimeter of the district (PD) to the circumference of a circle whose area is equal to the area of the district. A district’s Schwartzberg score as calculated below falls with the range of [0,1] and a score closer to 1 indicates a more compact district.</p>
+<img src="images/eq_schwartzberg.png" alt="" height="250" width="500"><br>
+<img src="images/schwartzberg.png" alt="Schwartzberg" height="600" width="600"><br>
+
+<h5>Reock Score</h5>
+<p>The Reock Score (R) is the ratio of the area of the district AD to the area of a minimum bounding cirle (AMBC) that encloses the district’s geometry. A district’s Reock score falls within the range of [0,1] and a score closer to 1 indicates a more compact district.</p>
+<img src="images/eq_reock.png" alt="" height="250" width="500"><br>
+<img src="images/reock.png" alt="Reock" height="600" width="600"><br>
+
+<h5>Convex Hull</h5>
+<p>The Convex Hull score is a ratio of the area of the district to the area of the minimum convex polygon that can encloses the district’s geometry. A district’s Convex Hull score falls within the range of [0,1] and a score closer to 1 indicates a more compact district.</p>
+<img src="images/eq_convex.png" alt="" height="250" width="500"><br>
+<img src="images/convex-hull.png" alt="Convex-Hull" height="600" width="600"><br>
+
+<h5>X-Symmetry</h5>
+<p>X-Symmetry is calculated by dividing the overlapping area AO, between a district and its reflection across the horizontal axis by the area of the original district AD. A district’s X-Symmetry score falls with the range of [0,1] and a score closer to 1 indicates a more compact district.</p>
+<img src="images/eq_symmetry.png" alt="" height="250" width="500"><br>
+<img src="images/x-symmetry.png" alt="X-Symmetry" height="600" width="600"><br>
+
+<h5>Length-Width</h5>
+<p>The Length-Width Ratio (LW) is calculated as the ratio of the length (LMBR) to the width (WMBR) of the minimum bounding rectangle surrounding the district. To orient the Length-Width score towards other compactness measures the maximum value of a district’s width or length has been set to the denominator, making scores close to 1 more compact, and scores closer to zero less compact.</p>
+<img src="images/eq_length.png" alt="" height="250" width="500">
+<img src="images/length-width.png" alt="Length-Width" height="600" width="600"><br>
+
+<h5>References<h5>
+Harris, Curtis C. 1964. “A scientific method of districting”. Behavioral Science 3(9), 219–225.<br>
+
+Polsby, Daniel D., and Robert D. Popper. 1991. “The Third Criterion: Compactness as a procedural safeguard against partisan gerrymandering.” Yale Law & Policy Review 9 (2): 301–353.<br>
+
+Reock, Ernest C. 1961. “A note: Measuring compactness as a requirement of legislative apportionment.” Midwest Journal of Political Science 1(5), 70–74.<br>
+
+Schwartzberg, Joseph E. 1965. “Reapportionment, gerrymanders, and the notion of compactness”. In: Minn. L. Rev. 50, 443.

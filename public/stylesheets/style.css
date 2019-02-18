@@ -1,0 +1,236 @@
+.container {
+  background-color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  background-image: url('images/map.png');
+  height: -webkit-fill-available;
+  width: -webkit-fill-available;
+  background-size: 65%;
+  background-repeat: no-repeat;
+  background-position-x: right, 4vw;
+  background-position-y: 4vh;
+  padding-top: 6vh;
+  background-attachment: fixed;
+}
+
+#lightHeader {
+  font-size: 13vw;
+  color: #a7b6ce;
+  padding-left: 2vw;
+  padding-right: 2vw;
+  position: absolute;
+  top: 25%;
+}
+
+#darkHeader {
+  font-size: 13vw;
+  color: #435777;
+  padding-left: 2vw;
+  padding-bottom: 2vh;
+  position: absolute;
+  bottom: 30%;
+}
+
+.arrow-wrap {
+  position:relative;
+  z-index:1;
+  left:50%;
+  top:-15vh;
+  margin-left:-5em;
+  background:#111;
+  width:10em;
+  height:10em;
+  padding:4em 2em;
+  border-radius:50%;
+  font-size:0.5em;
+  display:block;
+  box-shadow:0px 0px 5px 0px #333;
+}
+
+.arrow {
+  float:left;
+  position:relative;
+  width: 0px;
+height: 0px;
+border-style: solid;
+border-width: 3em 3em 0 3em;
+border-color: #ffffff transparent transparent transparent;
+  -webkit-transform:rotate(360deg)
+}
+
+.arrow:after {
+  content:'';
+  position:absolute;
+  top:-3.2em;
+  left:-3em;
+  width: 0px;
+height: 0px;
+border-style: solid;
+border-width: 3em 3em 0 3em;
+border-color: #111 transparent transparent transparent;
+  -webkit-transform:rotate(360deg)
+}
+
+.main {
+  background: none;
+}
+
+
+.arrow-wrap:hover .hint {
+  opacity:1;
+}
+
+
+@-webkit-keyframes arrows {
+  0% { top:0; }
+  10% { top:12%; }
+  20% { top:0; }
+  30% { top:12%; }
+  40% { top:-12%; }
+  50% { top:12%; }
+  60% { top:0; }
+  70% { top:12%; }
+  80% { top:-12%; }
+  90% { top:12%; }
+  100% { top:0; }
+}
+
+.arrow-wrap .arrow {
+  -webkit-animation: arrows 2.8s 0.4s;
+  -webkit-animation-delay: 3s;
+}
+
+.about {
+  padding: 5vw;
+  height: 100vh;
+
+
+}
+
+.button {
+  margin-left: 50%;
+  flex: 1 1 auto;
+  margin: 10px;
+  padding: 20px;
+  border: 2px solid #1f0808;
+  text-align: center;
+  text-transform: uppercase;
+  position: relative;
+  overflow:hidden;
+  transition: .3s;
+  width: 40vw;
+  position: absolute;
+  left: 30%;
+  margin-bottom: 4vh;
+}
+.button:after {
+  position: absolute;
+  transition: .3s;
+  content: '';
+  width: 0;
+  left: 50%;
+  bottom: 0;
+  height: 3px;
+  background: #331919;
+}
+.button:hover{
+  cursor: pointer;
+  transform: scale(1.2);
+}
+.button:hover:after {
+  width: 0%;
+}
+
+#div-graphs {
+  padding: 0px;
+  margin: 0px;
+}
+#map {
+  width: auto;
+  height: 38vh;
+}
+html,body,h1,h2,h3,h4,h5 {
+  font-family: "Raleway", sans-serif
+}
+
+.info {
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+.info h4 {
+    margin: 0 0 5px;
+    color: #777;
+}
+
+[data-color="good"]{
+  box-shadow: inset 3px 3px 7px #2cac2c;
+}
+
+[data-color="bad"]{
+  box-shadow: inset 3px 3px 7px #c02424;
+}
+
+
+#districtTableBody:hover tr:not(:hover) th {
+  opacity: .6;
+  transition: opacity 0.2s ease-out;
+}
+
+#districtTableBody tr th {
+  opacity: 1;
+  transition: opacity 0.2s ease-in;
+  font-size: larger;
+  border: 1px solid #ddd;
+}
+
+#div-graphs {
+  margin-left:300px;
+  width: 45%;
+}
+#barChart {
+  height: 200px;
+}
+#lengthwidthBarChart {
+  height: 200px;
+}
+
+.matchTable {
+  color: black !important;
+  background-color: white !important;
+}
+
+
+table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_desc, table.dataTable thead>tr>th.sorting, table.dataTable thead>tr>td.sorting_asc, table.dataTable thead>tr>td.sorting_desc, table.dataTable thead>tr>td.sorting {
+  color: black !important;
+  background-color: white !important;
+  font-size: larger;
+}
+
+table.dataTable tbody tr.selected {
+    color: white !important;
+    background-color: #eeeeee !important;
+}
+
+.dataTable tbody tr td{
+    border-bottom: 1px solid transparent;
+}
+
+.dataTable tbody tr:hover td {
+    border-top: red 1px solid;
+    border-bottom: red 1px solid;
+}
+
+.c3-chart-arc text {
+    fill: red;
+    color: red;
+}
+
+.title {
+  width: 100%;
+  height: 100vh;
+  margin-bottom: -1%;
+  padding-bottom: 5%;
+}

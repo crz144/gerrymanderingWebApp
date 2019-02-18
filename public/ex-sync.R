@@ -1,0 +1,22 @@
+
+#attach(input[[1]])
+#str(input[[1]])
+# output of final expression is returned to node
+#cat(str(df))
+
+
+needs(dplyr)
+attach(input[[1]])
+
+return("early returns are ignored")
+cat("so are undirected calls to cat")
+print("or print")
+cat("unless directed to a file", file = "out.Rout")
+
+# output of final expression is returned to node
+df %>%
+  mutate(group = cut(rating, nGroups, ordered = T)) %>%
+  group_by(group) %>%
+  summarize_all(funs_(fxn)) %>%
+  select(group, rating, advance) %>%
+  mutate(group = as.character(group))

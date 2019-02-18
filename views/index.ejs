@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+  <% include partials/head %>
+  <script>
+      if (window.File) {
+          // Great success! All the File APIs are supported.
+      } else {
+          alert('The File APIs are not fully supported in this browser.');
+      }
+  </script>
+  <body class="w3-light-grey">
+    <!-- Sidebar/menu -->
+    <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+     <div class="w3-container">
+       <h5>Compactness Information</h5>
+       <!-- Trigger the modal with a button -->
+         <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+         <br><br>
+             Want to look at your own map?
+         <input type="file" id="loadMap" name="loadMapBox" onchange="handleFileSelect(this.files)"/>
+         <script>
+             function handleFileSelect(files) {
+                 let file = files[0];
+                 parseAsGeoJson(file);
+             }
+         </script>
+         <!-- Click here <href = "measure-info.html"> -->
+       <h5>Select Measure Boundaries</h5>
+      <select id="boundarySelect" onchange="changeBoundary()">
+        <option value="original">Original Gerrymander
+        <option value="median">Median
+        <option value="custom">Custom
+      </select>
+
+      <div id="boundaryType"></div>
+      <div id="customBoundarySelect" style="display: none;">
+        <br>
+        Reock: <input type="text" id="reockBoundary" placeholder="0.500" style="float:right;"><br><br>
+        Polsby-Popper: <input type="text" id="polsbyPopperBoundary" placeholder="0.500" style="float:right;"><br><br>
+        Schwartzberg: <input type="text" id="schwartzbergBoundary" placeholder="0.500" style="float:right;"><br><br>
+        Convex-Hull: <input type="text" id="convexHullBoundary" placeholder="0.500" style="float:right;"><br><br>
+        Length-Width: <input type="text" id="lengthWidthBoundary" placeholder="0.500" style="float:right;"><br><br>
+        X-Symmetry: <input type="text" id="xSymmetryBoundary" placeholder="0.500" style="float:right;"><br><br>
+        <input type="submit" value="Submit" onclick = "getBoundaryInput()">
+      </div>
+       <h5>Map Types</h5>
+      </div>
+
+     <div id="div-nav-drawer" class="w3-bar-block">
+       <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
+
+     </div>
+    </nav>
+
+    <!-- BEGIN MAIN DISPLAY AREA -->
+    <div id="map" style="margin-left:300px;"></div>
+    <div id="div-graphs" class="w3-twothird">
+      <table id = "districtTable" class="mdl-data-table">
+         <thead>
+             <tr>
+               <th>District</th>
+               <th>Reock</th>
+               <th>Polsby-Popper</th>
+               <th>Schwartzberg</th>
+               <th>Convex-Hull</th>
+               <th>Length-Width</th>
+               <th>X-Symmetry</th>
+             </tr>
+         </thead>
+         <tbody id="districtTableBody"></tbody>
+       </table>
+    </div>
+
+    <div id="div-metrics" class="w3-third">
+      <br><br>
+      <div id = "barChart"></div><br>
+      <div id = "lengthwidthBarChart"></div>
+    </div>
+    <!-- END MAIN DISPLAY AREA -->
+
+    <!-- BEGIN MODAL AREA -->
+     <div class="modal fade" id="myModal" role="dialog">
+       <div class="modal-dialog modal-lg">
+         <!-- Modal content-->
+         <div class="modal-content">
+           <div class="modal-header">
+             <button type="button" class="close" data-dismiss="modal">&times;</button>
+             <h4 class="modal-title">Compactness Information</h4>
+           </div>
+           <div class="modal-body">
+             <% include partials/information %>
+           </div>
+           <div class="modal-footer">
+             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+           </div>
+         </div>
+       </div>
+     </div>
+    <!-- END MODAL AREA -->
+
+    <script>
+    $(document).ready(function() {
+       var ncrGeoJSONDump =  "<%= geoDump %>";
+       var dataObj = JSON.parse(ncrGeoJSONDump.replace(/&#34;/g, '"'));
+
+        initializeTable(dataObj);
+        initMap();
+
+        //highlight row and generate charts on hover
+        $('#districtTableBody tr').hover(function(){
+            var district = $(this).attr('id');
+            highlightDistrict(district);
+            districtChart(district, dataObj);
+            averageChart(district, dataObj);
+
+            //highlighting the rows with the good/bad/ok colors
+            $(`.boxable${district}[data-color="good"]`).css('background-color', '#99ff99');
+            $(`.boxable${district}[data-color="bad"]`).css('background-color', '#ff6666');
+
+
+        }, function(){
+            resetAllHighlights();
+            var district = $(this).attr('id');
+
+            //reset all color highlights
+            $(`.boxable${district}`).css('background-color', '');
+        });
+    });
+
+    $('.button').click(function(){
+        console.log("click me");
+        window.location = '../map'
+    });
+
+    $('#boundaryType').html('<br>Now displaying original boundaries.<br><br>' +
+    '<div><p style="float:left;margin:0px;padding:0px;">Reock:</p><p style="float:right;margin:0px;padding:0px;">0.289</p></div><br><br>' +
+    '<div><p style="float:left;margin:0px;padding:0px;">Polsby-Popper:</p><p style="float:right;margin:0px;padding:0px;">0.095</p></div><br><br>' +
+    '<div><p style="float:left;margin:0px;padding:0px;">Schwartzberg:</p><p style="float:right;margin:0px;padding:0px;">0.308</p></div><br><br>' +
+    '<div><p style="float:left;margin:0px;padding:0px;">Convex-Hull:</p><p style="float:right;margin:0px;padding:0px;">0.494</p></div><br><br>' +
+    '<div><p style="float:left;margin:0px;padding:0px;">Length-Width:</p><p style="float:right;margin:0px;padding:0px;">0.384</p></div><br><br>' +
+    '<div><p style="float:left;margin:0px;padding:0px;">X-Symmetry:</p><p style="float:right;margin:0px;padding:0px;">0.717</p></div><br><br>');
+    </script>
+  </body>
+</html>
